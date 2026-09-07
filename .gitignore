@@ -1,0 +1,18 @@
+# Node / Playwright
+node_modules/
+playwright-report/
+test-results/
+blob-report/
+
+# Environnement
+.env
+.env.*
+
+# Logs
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

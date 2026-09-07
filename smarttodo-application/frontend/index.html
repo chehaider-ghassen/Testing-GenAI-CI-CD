@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartTodo — Carnet de bord</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===================== Login screen ===================== -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <p class="wordmark">SmartTodo</p>
+      <p class="tagline">Un carnet de bord pour vos tâches.</p>
+
+      <form id="login-form" autocomplete="off">
+        <label class="field-label" for="username-input">Nom d'utilisateur</label>
+        <input
+          class="text-input"
+          id="username-input"
+          type="text"
+          maxlength="50"
+          placeholder="ex. alex"
+          required
+        />
+        <button class="btn btn-full" type="submit">Entrer</button>
+        <p id="login-error" class="error-text hidden"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== Main app ===================== -->
+  <div id="app-shell" class="app-shell hidden">
+    <header class="topbar">
+      <p class="wordmark">SmartTodo</p>
+      <div class="session">
+        <span id="username-display"></span>
+        <button id="logout-btn" type="button">se déconnecter</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Sidebar: search & filters -->
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <p class="sidebar-heading">RECHERCHER</p>
+          <input
+            class="text-input"
+            id="search-input"
+            type="text"
+            placeholder="titre ou description…"
+          />
+        </div>
+
+        <div class="sidebar-section">
+          <p class="sidebar-heading">STATUT</p>
+          <label class="checkbox-row">
+            <input type="checkbox" class="filter-status" value="À faire" />
+            À faire
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" class="filter-status" value="Terminée" />
+            Terminée
+          </label>
+        </div>
+
+        <div class="sidebar-section">
+          <p class="sidebar-heading">PRIORITÉ</p>
+          <label class="checkbox-row">
+            <input type="checkbox" class="filter-priority" value="Basse" />
+            <span class="tag-dot basse"></span> Basse
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" class="filter-priority" value="Moyenne" />
+            <span class="tag-dot moyenne"></span> Moyenne
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" class="filter-priority" value="Haute" />
+            <span class="tag-dot haute"></span> Haute
+          </label>
+        </div>
+
+        <button class="clear-filters" id="clear-filters-btn" type="button">
+          Réinitialiser les filtres
+        </button>
+      </aside>
+
+      <!-- Main log -->
+      <main class="log-main">
+        <div class="log-toolbar">
+          <h2>Journal des tâches</h2>
+          <span class="log-count" id="log-count"></span>
+        </div>
+
+        <details class="new-entry" id="new-entry-panel">
+          <summary><span class="plus">+</span> Nouvelle entrée</summary>
+          <form class="new-entry-form" id="new-entry-form" autocomplete="off">
+            <div class="form-row">
+              <label class="field-label" for="title-input">Titre *</label>
+              <input class="text-input" id="title-input" type="text" maxlength="100" />
+              <div class="char-count"><span id="title-count">0</span>/100</div>
+            </div>
+
+            <div class="form-row">
+              <label class="field-label" for="description-input">Description</label>
+              <textarea class="text-input" id="description-input" rows="3" maxlength="500"></textarea>
+              <div class="char-count"><span id="description-count">0</span>/500</div>
+            </div>
+
+            <div class="form-row-inline">
+              <div>
+                <label class="field-label" for="priority-input">Priorité *</label>
+                <select class="text-input" id="priority-input">
+                  <option value="">— choisir —</option>
+                  <option value="Basse">Basse</option>
+                  <option value="Moyenne">Moyenne</option>
+                  <option value="Haute">Haute</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="due-date-input">Échéance (optionnel)</label>
+                <input class="text-input" id="due-date-input" type="date" />
+              </div>
+            </div>
+
+            <button class="btn" type="submit">Ajouter au journal</button>
+            <div class="field-errors hidden" id="form-errors"></div>
+          </form>
+        </details>
+
+        <div class="log-list" id="log-list">
+          <!-- entries injected by app.js -->
+        </div>
+
+        <div class="empty-state hidden" id="empty-state">
+          <p class="glyph">—</p>
+          <p>Aucune tâche pour l'instant. Ouvrez « Nouvelle entrée » pour commencer.</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
